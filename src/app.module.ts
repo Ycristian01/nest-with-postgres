@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Friend } from './friends/friend.entity';
-import { FriendsController } from './friends/friends.controller';
-import { FriendsService } from './friends/services/friends.service';
+import { Friend } from './friend/friend.entity';
+import { FriendsController } from './friend/friends.controller';
+import { FriendsService } from './friend/services/friends.service';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
