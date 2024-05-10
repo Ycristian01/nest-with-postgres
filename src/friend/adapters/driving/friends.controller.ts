@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Logger, Post } from '@nestjs/common';
 import { FriendsService } from 'src/friend/domain/in-bound/friends.service';
-import { Friend } from 'src/friend/domain/model/friend';
+import { Friend } from 'src/friend/domain/model/friend.entity';
 import { CreateFriendDto } from 'src/friend/dtos/friends.dto';
 
 @Controller('friends')
@@ -9,12 +9,12 @@ export class FriendsController {
   constructor(private friendsService: FriendsService) {}
 
   @Post()
-  createFriend(@Body() body: CreateFriendDto) {
+  async createFriend(@Body() body: CreateFriendDto): Promise<Friend> {
     return this.friendsService.create(body);
   }
 
   @Get()
-  getAllFriends(): Friend[] {
+  async getAllFriends(): Promise<Friend[]> {
     const friends = this.friendsService.findAll();
     this.logger.debug({ friends });
 

@@ -1,6 +1,6 @@
-import { Friend } from '../model/friend';
+import { Friend } from '../model/friend.entity';
 
 export interface IFriendService {
-  create(friend: Friend): Friend;
-  findAll(): Friend[];
+  create(friend: Friend): Promise<Friend>;
+  findAll(): Promise<Friend[]>;
 }

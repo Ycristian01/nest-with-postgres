@@ -1,18 +1,12 @@
 import { Module } from '@nestjs/common';
 import { FriendsController } from './adapters/driving/friends.controller';
 import { FriendsService } from './domain/in-bound/friends.service';
-import { IFriendRepository } from './domain/out-bound/i-friend.repository';
-import { FriendInMemory } from './adapters/driven/friend-in-memory';
+import { RelationalFriendPersistenceModule } from 'src/friend/infrastructure/persistence/relational/relational-friend-persistence.module';
 
 @Module({
-  imports: [],
+  imports: [RelationalFriendPersistenceModule],
   controllers: [FriendsController],
-  providers: [
-    FriendsService,
-    {
-      provide: IFriendRepository,
-      useClass: FriendInMemory,
-    },
-  ],
+  providers: [FriendsService],
+  exports: [FriendsService, RelationalFriendPersistenceModule],
 })
 export class FriendModule {}

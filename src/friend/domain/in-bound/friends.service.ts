@@ -1,23 +1,18 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreateFriendDto } from '../../dtos/friends.dto';
+import { Friend } from '../model/friend.entity';
 import { IFriendService } from './i-friend.service';
-import { IFriendRepository } from '../out-bound/i-friend.repository';
-import { Friend } from '../model/friend';
+import { FriendRepository } from '../out-bound/friend.repository';
 
 @Injectable()
 export class FriendsService implements IFriendService {
-  constructor(
-    @Inject(IFriendRepository)
-    private readonly friendRepo: IFriendRepository,
-  ) {}
+  constructor(private readonly friendRepo: FriendRepository) {}
 
-  create(body: CreateFriendDto): Friend {
-    const friend = new Friend(body);
-    this.friendRepo.create(friend);
-    return friend;
+  async create(body: CreateFriendDto): Promise<Friend> {
+    return this.friendRepo.create(body);
   }
 
-  findAll(): Friend[] {
+  async findAll(): Promise<Friend[]> {
     return this.friendRepo.findAll();
   }
 }
