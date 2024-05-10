@@ -1,16 +1,17 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Friend } from './friend/friend.entity';
-import { FriendsController } from './friend/friends.controller';
-import { FriendsService } from './friend/services/friends.service';
 import { ConfigModule } from '@nestjs/config';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { FriendModule } from './friend/friend.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
+      host: process.env.HOST,
       port: 5432,
       database: process.env.DB_NAME,
       username: process.env.DB_USER,
@@ -19,8 +20,9 @@ import { ConfigModule } from '@nestjs/config';
       synchronize: true,
     }),
     TypeOrmModule.forFeature([Friend]),
+    FriendModule,
   ],
-  controllers: [FriendsController],
-  providers: [FriendsService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

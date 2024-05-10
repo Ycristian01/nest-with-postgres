@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { FriendsService } from './services/friends.service';
+import { FriendsService } from './domain/in-bound/friends.service';
 import { Friend } from './friend.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { CreateFriendDto } from './dtos/friends.dto';
