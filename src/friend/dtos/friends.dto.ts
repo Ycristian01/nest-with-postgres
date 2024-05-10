@@ -4,7 +4,7 @@ export class CreateFriendDto {
   @IsNotEmpty({ message: 'name no puede estar vacío' })
   name: string;
 
-  @IsNotEmpty({ message: 'secondName no puede estar vacío' })
+  @IsOptional()
   secondName: string;
 
   @IsNotEmpty({ message: 'workplace no puede estar vacío' })
